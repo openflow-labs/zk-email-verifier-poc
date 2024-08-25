@@ -3,8 +3,8 @@ import { generateEmailVerifierInputs } from "@zk-email/helpers/dist/input-genera
 
 export const STRING_PRESELECTOR = "email was meant for @";
 
-export type ITwitterCircuitInputs = {
-  twitterUsernameIndex: string;
+export type IMercadoPagoCircuitInputs = {
+  mercadoPagoUsernameIndex: string;
   address: string;
   emailHeader: string[];
   emailHeaderLength: string;
@@ -16,10 +16,10 @@ export type ITwitterCircuitInputs = {
   bodyHashIndex?: string | undefined;
 };
 
-export async function generateTwitterVerifierCircuitInputs(
+export async function generateMercadoPagoVerifierCircuitInputs(
   email: string | Buffer,
   ethereumAddress: string
-): Promise<ITwitterCircuitInputs> {
+): Promise<IMercadoPagoCircuitInputs> {
   const emailVerifierInputs = await generateEmailVerifierInputs(email, {
     shaPrecomputeSelector: STRING_PRESELECTOR,
     maxBodyLength: 24192
@@ -34,7 +34,7 @@ export async function generateTwitterVerifierCircuitInputs(
 
   return {
     ...emailVerifierInputs,
-    twitterUsernameIndex: usernameIndex.toString(),
+    mercadoPagoUsernameIndex: usernameIndex.toString(),
     address,
   };
 }
