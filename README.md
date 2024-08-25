@@ -1,1 +1,1 @@
-# MercadoPago Zk email prove
+# MercadoPago Zk email verifier
