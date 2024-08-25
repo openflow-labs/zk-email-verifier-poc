@@ -11,8 +11,8 @@ import {
 } from "@zk-email/helpers/dist/chunked-zkey";
 import { abi } from "../abi.json";
 import {
-  generateTwitterVerifierCircuitInputs,
-  ITwitterCircuitInputs,
+  generateMercadoPagoVerifierCircuitInputs,
+  IMercadoPagoCircuitInputs,
 } from "@proof-of-twitter/circuits/helpers";
 import { LabeledTextArea } from "../components/LabeledTextArea";
 import DragAndDropTextBox from "../components/DragAndDropTextBox";
@@ -430,12 +430,12 @@ export const MainPage: React.FC<{}> = (props) => {
               status !== "proof-files-downloaded-successfully"
             }
             onClick={async () => {
-              let input: ITwitterCircuitInputs;
+              let input: IMercadoPagoCircuitInputs;
               try {
                 setDisplayMessage("Generating proof...");
                 setStatus("generating-input");
 
-                input = await generateTwitterVerifierCircuitInputs(
+                input = await generateMercadoPagoVerifierCircuitInputs(
                   Buffer.from(emailFull),
                   ethereumAddress
                 );

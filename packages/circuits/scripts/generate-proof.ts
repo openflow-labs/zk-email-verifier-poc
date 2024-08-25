@@ -1,21 +1,21 @@
 import { program } from "commander";
 import fs from "fs";
 import path from "path";
-import { generateTwitterVerifierCircuitInputs } from "../helpers";
+import { generateMercadoPagoVerifierCircuitInputs } from "../helpers";
 const snarkjs = require("snarkjs");
 
 program
   .requiredOption("--email-file <string>", "Path to email file")
   .requiredOption(
     "--ethereum-address <string>",
-    "Ethereum address to verify twitter handle against"
+    "Ethereum address to verify mercadopago receipt reception against"
   )
   .option("--silent", "No console logs");
 
 program.parse();
 const args = program.opts();
 
-const CIRCUIT_NAME = "twitter";
+const CIRCUIT_NAME = "mercadopago";
 const BUILD_DIR = path.join(__dirname, "../build");
 const OUTPUT_DIR = path.join(__dirname, "../proofs");
 
@@ -38,7 +38,7 @@ async function generate() {
   log("Generating input and proof for:", args.emailFile);
 
   const rawEmail = Buffer.from(fs.readFileSync(args.emailFile, "utf8"));
-  const circuitInputs = await generateTwitterVerifierCircuitInputs(rawEmail, args.ethereumAddress);
+  const circuitInputs = await generateMercadoPagoVerifierCircuitInputs(rawEmail, args.ethereumAddress);
 
   log("\n\nGenerated Inputs:", circuitInputs, "\n\n");
 
